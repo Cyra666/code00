@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Animals table</title>
+    <link href="minimal-table.css" rel="stylesheet" type="text/css">
+    <style>
+      .submit-button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 6px 10px;
+        text-align: center;
+        margin: 2px 2px;
+        cursor: pointer;
+      }
+
+      .submit-button[disabled] {
+        background-color: gray;
+        cursor: not-allowed;
+      }
+    </style>
+    <script>
+      function enableSubmitButton() {
+        const username = document.getElementById('username').value;
+        const realname = document.getElementById('realname').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm_password').value;
+        const mobile = document.getElementById('mobile').value;
+        const email = document.getElementById('email').value;
+        const address = document.getElementById('address').value;
+
+        const submitButton = document.getElementById('submit-button');
+
+        if (username && realname && password && confirmPassword && mobile && email && address) {
+          submitButton.disabled = false;
+        } else {
+          submitButton.disabled = true;
+        }
+      }
+
+      function validateForm() {
+        const username = document.getElementById('username').value;
+        const realname = document.getElementById('realname').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm_password').value;
+        const mobile = document.getElementById('mobile').value;
+        const email = document.getElementById('email').value;
+        const address = document.getElementById('address').value;
+
+        if (!username || !realname || !password || !confirmPassword || !mobile || !email || !address) {
+          alert('所有内容均为必填项！');
+          return false;
+        }
+
+        if (password !== confirmPassword) {
+          alert('密码和确认密码不一致！');
+          return false;
+        }
+
+        return true;
+      }
+    </script>
+  </head>
+
+  <body>
+    <form onsubmit="return validateForm()" action="html_form_action.php" method="post">
+      <label for="avatar">上传头像:</label>
+      <input type="file" id="avatar" name="avatar" accept="image/*">
+
+      <br>
+      <br>
+      <label for="bio">个人说明:</label>
+      <textarea id="bio" name="bio" rows="4" cols="50"></textarea>
+
+      <table>
+        <tr>
+          <th colspan="5" style="text-align:center;font-size:24px;"><a href="https://www.zju.edu.cn/"> 注册信息</a></th>
+        </tr>
+        <tr>
+          <th rowspan="5">基本信息</th>
+          <td>用户姓名：</td>
+          <td colspan="2"><input type="text" placeholder="请输入用户姓名" id="username" name="username" oninput="enableSubmitButton()"></td>
+        </tr>
+        <tr>
+          <td>真实姓名：</td>
+          <td colspan="2"><input type="text" id="realname" name="realname" oninput="enableSubmitButton()"></td>
+        </tr>
+        <tr>
+          <td>密   码：</td>
+          <td colspan="2"><input type="password" id="password" name="password" oninput="enableSubmitButton()"></td>
+        </tr>
+        <tr>
+          <td>确认密码：</td>
+          <td colspan="2"><input type="password" id="confirm_password" name="confirm_password" oninput="enableSubmitButton()"></td>
+        </tr>
+        <tr>
+          <td>性   别：</td>
+          <td colspan="2">
+            <input type="radio" name="gender" value="male">男
+            <input type="radio" name="gender" value="female">女
+          </td>
+        </tr>
+        <tr>
+          <th colspan="4">通信信息</th>
+        </tr>
+        <tr>
+          <td>手机号码</td>
+          <td><input type="text" id="mobile" name="mobile" oninput="enableSubmitButton()"></td>
+          <td>电子邮箱</td>
+          <td><input type="text" id="email" name="email" oninput="enableSubmitButton()"></td>
+        </tr>
+        <tr>
+          <td>居住地址</td>
+          <td colspan="3" style="width: 100%;">
+            <input type="text" id="address" name="address" oninput="enableSubmitButton()">
+          </td>
+        </tr>
+        <tr>
+          <th colspan="4">额外信息</th>
+        </tr>
+        <tr>
+          <td>爱   好：</td>
+          <td colspan="3">
+            <input type="checkbox" name="hobbies[]" value="basketball">篮球
+            <input type="checkbox" name="hobbies[]" value="football">足球
+            <input type="checkbox" name="hobbies[]" value="pingpong">乒乓球
+          </td>
+        </tr>
+      </table>
+      
+      <input type="submit" id="submit-button" class="submit-button" value="立即注册" disabled>
+      <input type="reset" value="重置按钮"><br>
+    </form>
+  </body>
+</html>
+
+
+
